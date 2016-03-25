@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+20.times do |n|
+  Plant.create name: "sample tree name #{n}",
+               scientific_name: "sample tree scientific name #{n}",
+               description: "sample tree description #{n}"
+end
