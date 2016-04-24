@@ -5,8 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+def seed_image(file_name)
+  File.open(
+    File.join(Rails.root, "/app/assets/images/seed/#{file_name}.jpg")
+  )
+end
+
 20.times do |n|
-  Plant.create name: "sample tree name #{n}",
+  Plant.create! name: "sample tree name #{n}",
                scientific_name: "sample tree scientific name #{n}",
-               description: "sample tree description #{n}"
+               description: "sample tree description #{n}",
+               picture: seed_image("plant_sample")
 end
