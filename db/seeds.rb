@@ -11,6 +11,19 @@ def seed_image(file_name)
   )
 end
 
+User.create! name: "RathanakJame",
+             username: "rathanak",
+             password: '1234567890',
+             password_confirmation: '1234567890',
+             sex: 'M'
+
+10.times do |n|
+  User.create! name: "Rathanak-#{n}",
+               username: "rathanak_#{n}",
+               password: '1234567890',
+               password_confirmation: '1234567890',
+               sex: 'M'
+end
 20.times do |n|
   Plant.create! name: "sample tree name #{n}",
                scientific_name: "sample tree scientific name #{n}",

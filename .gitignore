@@ -7,11 +7,41 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
 /tmp
+/config/database.yml
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+.rvmrc
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+/test/*
+/db/*.sqlite3
+/public/system/*
+/coverage/
+/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
+.project
+config/database.yml
+/config/database.yml
+/config/secrets.yml
+/public/uploads
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
+/public/assets/*
+/public/assets
+.DS_Store
+/.idea
+.zeus.sock
+zeus.json
+custom_plan.rb

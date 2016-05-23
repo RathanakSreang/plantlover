@@ -1,5 +1,6 @@
 class PlantsController < ApplicationController
-  before_action :set_plant, only: [:show, :update, :destroy]
+  before_filter :authenticate_with_token, except: [:show, :index]
+  before_action :set_plant, only: [:show, :edit, :update, :destroy]
 
   # GET /plants
   # GET /plants.json
@@ -15,6 +16,10 @@ class PlantsController < ApplicationController
     render json: @plant
   end
 
+  def new
+    render json: Plant.new
+  end
+
   # POST /plants
   # POST /plants.json
   def create
@@ -25,6 +30,10 @@ class PlantsController < ApplicationController
     else
       render json: @plant.errors, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    render json: @plant
   end
 
   # PATCH/PUT /plants/1
@@ -55,5 +64,12 @@ class PlantsController < ApplicationController
 
     def plant_params
       params.require(:plant).permit(:name, :scientific_name, :description, :picture, :picture_cache, :picture_url)
+    end
+
+    def authenticate_with_token
+      token = request.headers['HTTP_PLANLOVERTOKEN']
+      unless $redis.exists("plants_lover:#{token}")
+        render json: { errors: 'Not authenticated!'}, status: :unauthorized
+      end
     end
 end

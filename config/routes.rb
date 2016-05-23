@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :plants, except: [:new, :edit]
+  post 'signin' => 'sessions#create'
+  get 'signout' => 'sessions#destroy'
+  resources :plants
+  resources :users, except: [:new, :create, :edit, :update, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
