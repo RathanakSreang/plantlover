@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :plants
   validates :name, :username, presence: true, length: { minimum: 2, maximum: 40 }
   validates :username, uniqueness: true
   has_secure_password

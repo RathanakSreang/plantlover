@@ -24,9 +24,13 @@ User.create! name: "RathanakJame",
                password_confirmation: '1234567890',
                sex: 'M'
 end
-20.times do |n|
-  Plant.create! name: "sample tree name #{n}",
-               scientific_name: "sample tree scientific name #{n}",
-               description: "sample tree description #{n}",
-               picture: seed_image("plant_sample")
+
+2.times do |n|
+  User.all.each do |user|
+    Plant.create! name: "sample tree name #{n}",
+                 scientific_name: "sample tree scientific name #{n}",
+                 description: "sample tree description #{n}",
+                 picture: seed_image("plant_sample"),
+                 user_id: user.id
+  end
 end

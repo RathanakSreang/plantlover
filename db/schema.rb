@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517070115) do
+ActiveRecord::Schema.define(version: 20160524024634) do
 
   create_table "plants", force: :cascade do |t|
     t.string   "name"
@@ -20,9 +20,8 @@ ActiveRecord::Schema.define(version: 20160517070115) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "picture"
+    t.integer  "user_id"
   end
-
-  add_index "plants", ["id"], name: "sqlite_autoindex_plants_1", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -32,7 +31,5 @@ ActiveRecord::Schema.define(version: 20160517070115) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
-
-  add_index "users", ["id"], name: "sqlite_autoindex_users_1", unique: true
 
 end

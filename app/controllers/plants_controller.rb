@@ -1,7 +1,7 @@
 class PlantsController < ApplicationController
   before_filter :authenticate_with_token, except: [:show, :index]
   before_action :set_plant, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorize_action, only: [:edit, :update, :destroy]
   # GET /plants
   # GET /plants.json
   def index
@@ -66,9 +66,21 @@ class PlantsController < ApplicationController
       params.require(:plant).permit(:name, :scientific_name, :description, :picture, :picture_cache, :picture_url)
     end
 
+    def authorize_action
+      unless @user && @plant
+        render json: { errors: 'there not user or plants!'}, status: :unauthorized
+      end
+      if @plant.user.id != @user.id
+        render json: { errors: 'user is not authorized on this action'}, status: :unauthorized
+      end
+    end
+
     def authenticate_with_token
       token = request.headers['HTTP_PLANLOVERTOKEN']
-      unless $redis.exists("plants_lover:#{token}")
+      binding.pry
+      if PlantLoverRedis.exist?(token)
+        @user = User.find(PlantLoverRedis.get(token))
+      else
         render json: { errors: 'Not authenticated!'}, status: :unauthorized
       end
     end
